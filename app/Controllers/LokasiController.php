@@ -22,7 +22,10 @@ class LokasiController extends BaseController
                 'locations' => $data['data']
             ]);
         }catch (\Exception $e) {
-            return $e->getMessage();
+            return view('pages/lokasi',
+                [
+                    'locations' => []
+                ]);
         }
     }
 

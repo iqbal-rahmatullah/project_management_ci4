@@ -21,7 +21,9 @@ class ProyekController extends BaseController
                 'projects'=> $data['data']
             ]);
         }catch (\Exception $e) {
-            return $e->getMessage();
+            return view('pages/proyek', [
+                'projects'=> []
+            ]);
         }
     }
 
@@ -37,7 +39,9 @@ class ProyekController extends BaseController
                 'locations' => $data['data']
             ]);
         }catch (\Exception $e) {
-            return $e->getMessage();
+            return view('pages/create_proyek', [
+                'locations' => []
+            ]);
         }
     }
 
@@ -130,7 +134,10 @@ class ProyekController extends BaseController
                 'locations' => $locations['data'],
             ]);
         }catch (\Exception $e) {
-            return $e->getMessage();
+            return view('pages/edit_proyek', [
+                'project' => [],
+                'locations' => [],
+            ]);
         }
     }
 
