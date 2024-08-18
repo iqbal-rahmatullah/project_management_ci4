@@ -101,18 +101,18 @@ class LokasiController extends BaseController
     }
 
     public function edit() {
-//        $validation = \Config\Services::validation();
-//
-//        $validation->setRules([
-//            'namaLokasi' => 'required',
-//            'negara'     => 'required',
-//            'provinsi'   => 'required',
-//            'kota'       => 'required'
-//        ]);
-//
-//        if (!$this->validate($validation->getRules())) {
-//            return redirect()->back()->withInput()->with('validation', $this->validator);
-//        }
+        $validation = \Config\Services::validation();
+
+        $validation->setRules([
+            'namaLokasi' => 'required',
+            'negara'     => 'required',
+            'provinsi'   => 'required',
+            'kota'       => 'required'
+        ]);
+
+        if (!$this->validate($validation->getRules())) {
+            return redirect()->back()->withInput()->with('validation', $this->validator);
+        }
 
         $data = [
             'id'        => $this->request->getPost('id'),

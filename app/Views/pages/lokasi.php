@@ -14,9 +14,18 @@
     <?php endif; ?><?php if (session()->getFlashdata('error')): ?>
         <script>
             window.onload = function() {
-                alert('<?= esc(session()->getFlashdata('message')) ?>');
+                alert('<?= esc(session()->getFlashdata('error')) ?>');
             }
         </script>
+    <?php endif; ?>
+    <?php if (session()->getFlashdata('validation')): ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php foreach (session()->getFlashdata('validation') as $error): ?>
+                    <li><?= esc($error) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     <?php endif; ?>
 
     <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
@@ -62,7 +71,7 @@
                                     </div>
                                     <div class="modal-body">  
 
-                                        <form id="editLocationForm"  
+                                        <form id="editLocationForm<?= $location['id'] ?>"  
                                               action="/updateLokasi" method="post">
                                             <?= csrf_field() ?>
                                             <input type="hidden" name="_method" value="PUT">
@@ -84,14 +93,16 @@
                                                 <label for="editKota" class="form-label">City</label>
                                                 <input type="text" class="form-control" id="editKota" value="<?= $location['kota'] ?>" name="kota" required>
                                             </div>
+                                        </form>
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
 
                                         <button type="submit"  
-                                                form="editLocationForm" class="btn btn-primary">Save changes</button>
+                                                form="editLocationForm<?= $location['id'] ?>" class="btn btn-primary">Save changes</button>
                                     </div>
-                                    </form>
+
                                 </div>
                             </div>
                         </div>
