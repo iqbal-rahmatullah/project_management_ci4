@@ -72,7 +72,7 @@
                                     <div class="modal-body">  
 
                                         <form id="editLocationForm<?= $location['id'] ?>"  
-                                              action="/updateLokasi" method="post">
+                                              action="/lokasi" method="post">
                                             <?= csrf_field() ?>
                                             <input type="hidden" name="_method" value="PUT">
                                             <input type="hidden" id="id" value="<?= $location['id'] ?>" name="id">
