@@ -26,6 +26,20 @@ class ProyekController extends BaseController
     }
 
     public function create() {
-        return view('pages/create_proyek');
+        $client = Services::curlrequest();
+        $apiUrl = env("API_BASE_URL") . "/lokasi";
+
+        try {
+            $response = $client->get($apiUrl);
+            $data = json_decode($response->getBody(), true);
+
+            return view('pages/create_proyek', [
+                'locations' => $data['data']
+            ]);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
+
+    public function Store() {}
 }
