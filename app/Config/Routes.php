@@ -8,7 +8,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'ProyekController::index');
 $routes->get('create-proyek', 'ProyekController::create');
 $routes->post('/', 'ProyekController::store');
-$routes->delete('proyek/(:num)', 'LokasiController::delete/$1');
+$routes->delete('proyek/(:num)', 'ProyekController::delete/$1');
+$routes->get('edit-proyek/(:num)', 'ProyekController::edit/$1');
+$routes->put('/', 'ProyekController::update');
 
 $routes->get('lokasi', 'LokasiController::index');
 $routes->get('create-lokasi', 'LokasiController::create');

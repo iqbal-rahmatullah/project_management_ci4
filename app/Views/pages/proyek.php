@@ -3,6 +3,20 @@
 
 <?= $this->section('content') ?>
 
+<?php if (session()->getFlashdata('message')): ?>
+    <script>
+        window.onload = function() {
+            alert('<?= esc(session()->getFlashdata('message')) ?>');
+        }
+    </script>
+<?php endif; ?><?php if (session()->getFlashdata('error')): ?>
+    <script>
+        window.onload = function() {
+            alert('<?= esc(session()->getFlashdata('error')) ?>');
+        }
+    </script>
+<?php endif; ?>
+
 <div class="container mx-auto px-4">
     <h2 class="text-3xl mb-4">Projects</h2>
     <a href="/create-proyek" class="bg-blue-600 text-white p-2 rounded mb-4 inline-block">Create New Project</a>
@@ -30,11 +44,12 @@
                         <?php endif; ?>
                     </div>
                     <div class="px-6 pt-4 pb-4 flex justify-end">
-                        <a href="<?= site_url('project/edit/' . $project['id']) ?>" class="inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                        <a href="<?= site_url('edit-proyek/' . $project['id']) ?>" class="inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
                             Edit
                         </a>
-                        <form action="<?= site_url('project/delete/' . $project['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');" class="ml-2">
+                        <form action="/proyek/<?= esc($project['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this project?');" class="ml-2">
                             <?= csrf_field() ?>
+                            <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="inline-block bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700">
                                 Delete
                             </button>

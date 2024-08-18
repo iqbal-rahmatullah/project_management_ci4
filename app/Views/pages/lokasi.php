@@ -11,7 +11,9 @@
                 alert('<?= esc(session()->getFlashdata('message')) ?>');
             }
         </script>
-    <?php endif; ?><?php if (session()->getFlashdata('error')): ?>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
         <script>
             window.onload = function() {
                 alert('<?= esc(session()->getFlashdata('error')) ?>');

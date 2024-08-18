@@ -59,25 +59,23 @@ class LokasiController extends BaseController
 
         try {
             $response = $client->post($apiUrl, [
-                'json' => $data
+                'json' => $data,
+                'allow_redirects' => false,
+                'http_errors' => false
             ]);
 
             $statusCode = $response->getStatusCode();
             if ($statusCode == 201) {
                 return redirect()->to('/lokasi')->with('message', 'Location added successfully');
             } else {
-                return view('pages/create_lokasi', [
-                    'validation' => $this->validator,
-                    'inputData'  => $data,
-                    'error'      => 'Failed to save location. API returned status code ' . $statusCode
-                ]);
+                $responseBody = json_decode($response->getBody(), true);
+                $errorMessage = $responseBody['message'] ?? 'Invalid request. Please check your input.';
+                return redirect()->back()->with('error', $errorMessage)->withInput();
             }
         } catch (\Exception $e) {
-            return view('pages/create_lokasi', [
-                'validation' => $this->validator,
-                'inputData'  => $data,
-                'error'      => 'Failed to save location. ' . $e->getMessage()
-            ]);
+            log_message('error', 'API request failed: ' . $e->getMessage());
+
+            return redirect()->back()->with('error', 'An unexpected error occurred. Please try again later.')->withInput();
         }
     }
 
