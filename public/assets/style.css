@@ -1,0 +1,22 @@
+/* style.css */
+body {
+    font-family: sans-serif;
+}
+
+.sidebar {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding-top: 1rem;
+}
+
+.sidebar .nav-link {
+    color: #343a40;
+}
+
+.sidebar .nav-link.active {
+    background-color: #e9ecef;
+}
+
+.content {
+    padding: 1rem;
+}
